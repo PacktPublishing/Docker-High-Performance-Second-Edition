@@ -1,0 +1,35 @@
+---
+version: '3.7'
+
+services:
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+  prometheus:
+    image: prom/prometheus
+    configs:
+      - source: prometheus.yml
+        target: /etc/prometheus/prometheus.yml
+  cadvisor:
+    image: google/cadvisor
+    hostname: '{{.Node.Hostname}}'
+    deploy:
+      mode: global
+    command: -logtostderr=true -docker_only=true
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+
+
+configs:
+  prometheus.yml:
+    file: ./prometheus.yml
+
+# Set for debugging and testing purposes 
+networks:
+  default:
+    driver: overlay
+    attachable: true

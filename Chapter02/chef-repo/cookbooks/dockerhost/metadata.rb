@@ -1,0 +1,10 @@
+name 'dockerhost'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures dockerhost'
+long_description 'Installs/Configures dockerhost'
+version '0.1.0'
+
+depends 'docker', '~> 4.7'
+depends 'chef-vault', '~> 3.1'
