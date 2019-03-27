@@ -1,0 +1,16 @@
+---
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: cadvisor
+    dns_sd_configs:
+      - names:
+          - 'tasks.cadvisor'
+        type: A
+        port: 8080
+  - job_name: docker
+    static_configs:
+      - targets:
+          - dockerhost:1337
+          - node1:1337

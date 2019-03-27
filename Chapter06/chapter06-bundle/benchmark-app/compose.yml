@@ -1,0 +1,14 @@
+---
+version: '3.7'
+
+services:
+  web:
+    image: aespinosa/benchmark-app
+    ports:
+      - 8000:8000
+
+# Set for debugging and testing purposes 
+networks:
+  default:
+    driver: overlay
+    attachable: trueb

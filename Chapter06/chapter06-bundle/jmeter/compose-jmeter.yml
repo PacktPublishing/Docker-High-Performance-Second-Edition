@@ -1,0 +1,16 @@
+---
+version: '3.7'
+
+services:
+  jmeter:
+    image: aespinosa/jmeter
+    logging:
+      driver: json-file
+    deploy:
+      replicas: 2
+      endpoint_mode: dnsrr
+
+networks:
+  default:
+    driver: overlay
+    attachable: true
