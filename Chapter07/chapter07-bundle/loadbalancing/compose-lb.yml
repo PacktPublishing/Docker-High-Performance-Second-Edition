@@ -1,0 +1,38 @@
+---
+version: '3.7'
+
+services:
+  nginx:
+    image: nginx:stable
+    ports:
+      - '80:80'
+    configs:
+      - source: nginx.conf
+        target: /etc/nginx/nginx.conf
+  app_green:
+    image: aespinosa/app:1.0.0
+    deploy:
+      replicas: 4
+      endpoint_mode: dnsrr
+    networks:
+      default:
+        aliases:
+          - application
+  app_blue:
+    image: aespinosa/app:2.0.0
+    deploy:
+      replicas: 2
+      endpoint_mode: dnsrr
+    networks:
+      default:
+        aliases:
+          - application
+
+configs:
+  nginx.conf:
+    file: ./nginx.conf
+
+networks:
+  default:
+    driver: overlay
+    attachable: true
