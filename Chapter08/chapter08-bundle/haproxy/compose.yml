@@ -1,0 +1,15 @@
+---
+version: '3.7'
+
+services:
+  haproxy:
+    image: haproxy:1.9
+    ports:
+      - '80:80'
+    configs:
+      - source: haproxy.cfg
+        target: /usr/local/etc/haproxy/haproxy.cfg
+
+configs:
+  haproxy.cfg:
+    file: ./haproxy.cfg
