@@ -1,0 +1,9 @@
+version: '3.7'
+
+services:
+  jenkins:
+    image: dockerhp/jenkins
+    ports:
+      - '8080:8080'
+    deploy:
+      replicas: 1
